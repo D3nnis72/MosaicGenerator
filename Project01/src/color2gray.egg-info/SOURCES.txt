@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/color2gray/__init__.py
+src/color2gray/cli.py
+src/color2gray/colorspaces.py
+src/color2gray/core.py
+src/color2gray/io.py
+src/color2gray.egg-info/PKG-INFO
+src/color2gray.egg-info/SOURCES.txt
+src/color2gray.egg-info/dependency_links.txt
+src/color2gray.egg-info/requires.txt
+src/color2gray.egg-info/top_level.txt
+tests/test_cli.py
+tests/test_core.py

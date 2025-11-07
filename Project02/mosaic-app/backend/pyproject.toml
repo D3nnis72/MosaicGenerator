@@ -1,0 +1,28 @@
+[project]
+name = "mosaic-backend"
+version = "0.1.0"
+description = "Image mosaic generator with Conv2d tile averaging"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.111",
+    "uvicorn>=0.30",
+    "pillow>=10.0",
+    "torch>=2.2",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "httpx>=0.27",
+    "types-Pillow",
+]
+
+[tool.setuptools]
+packages = ["engine", "api", "cli"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = "-q"
+
