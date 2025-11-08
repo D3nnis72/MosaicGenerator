@@ -24,7 +24,7 @@ The editable install keeps the CLI entry point (`convert.py`) and package code i
 ## Quickstart
 
 ```bash
-python convert.py input.png output.png
+python convert.py ./data/input/default.jpg ./data/output/output.jpg
 ```
 
 Additional options:
