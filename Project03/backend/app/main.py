@@ -19,7 +19,11 @@ from .schemas import DatasetInfoResponse, DatasetListResponse, ErrorResponse, Mo
 APP_VERSION = "0.1.0"
 MAX_DATASET_TILES = int(os.getenv("MOSAIC_MAX_DATASET_TILES", "600"))
 
-app = FastAPI(title="Mosaic Studio API", version=APP_VERSION)
+app = FastAPI(
+    title="Mosaic Studio API",
+    version=APP_VERSION,
+    max_request_size=200 * 1024 * 1024,  # allow ~200 MB uploads for tile batches
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
