@@ -1,0 +1,30 @@
+[project]
+name = "mosaic-studio-backend"
+version = "0.1.0"
+description = "FastAPI + Torch backend for photo mosaic generation"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.29",
+  "python-multipart>=0.0.6",
+  "pillow>=10.2",
+  "numpy>=1.26",
+  "torch==2.2.*",
+  "torchvision==0.17.*",
+  "scipy>=1.11",
+  "scikit-image>=0.22",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx",
+  "pytest",
+]
+
+[build-system]
+requires = ["setuptools>=67"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*", "mosaic*"]

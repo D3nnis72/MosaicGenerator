@@ -9,4 +9,5 @@ build/
 .next/
 coverage/
 data/output/
+data/
 AnimalsDataset/

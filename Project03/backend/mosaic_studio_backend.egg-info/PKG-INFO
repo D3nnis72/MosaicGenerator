@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mosaic-studio-backend
+Version: 0.1.0
+Summary: FastAPI + Torch backend for photo mosaic generation
+Requires-Python: >=3.10
+Requires-Dist: fastapi>=0.110
+Requires-Dist: uvicorn[standard]>=0.29
+Requires-Dist: python-multipart>=0.0.6
+Requires-Dist: pillow>=10.2
+Requires-Dist: numpy>=1.26
+Requires-Dist: torch==2.2.*
+Requires-Dist: torchvision==0.17.*
+Requires-Dist: scipy>=1.11
+Requires-Dist: scikit-image>=0.22
+Provides-Extra: dev
+Requires-Dist: httpx; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
