@@ -12,36 +12,18 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-type FileSystemEntry = FileSystemFileEntry | FileSystemDirectoryEntry;
-
-interface FileSystemFileEntry extends FileSystemEntryBase {
+type FileEntry = FileSystemEntry & {
+  readonly isFile: true;
   file(
     successCallback: (file: File) => void,
     errorCallback?: (error: DOMException) => void
   ): void;
-  isFile: true;
-  isDirectory: false;
-}
+};
 
-interface FileSystemDirectoryEntry extends FileSystemEntryBase {
+type DirectoryEntry = FileSystemEntry & {
+  readonly isDirectory: true;
   createReader(): FileSystemDirectoryReader;
-  isFile: false;
-  isDirectory: true;
-}
-
-interface FileSystemEntryBase {
-  readonly name: string;
-  readonly fullPath: string;
-  readonly isFile: boolean;
-  readonly isDirectory: boolean;
-}
-
-interface FileSystemDirectoryReader {
-  readEntries(
-    successCallback: (entries: FileSystemEntry[]) => void,
-    errorCallback?: (error: DOMException) => void
-  ): void;
-}
+};
 
 interface TileUploadManagerProps {
   tiles: File[];
@@ -50,18 +32,26 @@ interface TileUploadManagerProps {
   onClear: () => void;
 }
 
+function isFileEntry(entry: FileSystemEntry): entry is FileEntry {
+  return entry.isFile;
+}
+
+function isDirectoryEntry(entry: FileSystemEntry): entry is DirectoryEntry {
+  return entry.isDirectory;
+}
+
 async function collectFilesFromEntry(entry: FileSystemEntry): Promise<File[]> {
-  if (entry.isFile) {
+  if (isFileEntry(entry)) {
     return await new Promise<File[]>((resolve, reject) => {
-      (entry as FileSystemFileEntry).file(
+      entry.file(
         (file) => resolve([file]),
         (error) => reject(error)
       );
     });
   }
 
-  if (entry.isDirectory) {
-    const reader = (entry as FileSystemDirectoryEntry).createReader();
+  if (isDirectoryEntry(entry)) {
+    const reader = entry.createReader();
     const entries: FileSystemEntry[] = [];
 
     const readAll = (): Promise<void> =>
